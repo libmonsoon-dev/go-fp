@@ -1,0 +1,6 @@
+package fp
+
+type Option(type T) struct {
+	Value T
+	Defined bool
+}
