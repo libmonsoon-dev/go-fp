@@ -1,0 +1,47 @@
+package fp
+
+func Map[T1, T2 any](input []T1, fn func(T1) T2) []T2 {
+	result := make([]T2, len(input))
+	for i, v := range input {
+		result[i] = fn(v)
+	}
+	return result
+}
+
+var MapInt2Float64 = Map[int, float64]
+var MapFloat642Int = Map[float64, int]
+var MapInt2Interface = Map[int, interface{}]
+
+func Filter[T any](input []T, fn func(T) bool) []T {
+	var maxIndex int
+	tmp := make([]T, len(input))
+	for _, v := range input {
+		if (fn(v)) {
+			tmp[maxIndex] = v
+			maxIndex++
+		}
+	}
+
+	result := make([]T, maxIndex)
+	for i, v := range tmp {
+		result[i] = v
+	}
+
+	return result
+
+}
+
+var FilterFloat64 = Filter[float64]
+var FilterInt = Filter[int]
+var FilterInterface = Filter[interface{}]
+
+func Reduce[T1, T2 any](input []T1, initState T2, fn func(T1, T2) T2) T2 {
+	for _, v := range input {
+		initState = fn(v, initState)
+	}
+
+	return initState
+}
+
+//var ReduceFloat642Set = Filter[float64, Set[float64]]
+//var ReduceInt2Set = Filter[int, Set[int]]
