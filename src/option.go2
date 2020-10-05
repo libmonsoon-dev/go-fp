@@ -1,6 +1,10 @@
 package fp
 
-type Option(type T) struct {
+type Option[T any] struct {
 	Value T
 	Defined bool
 }
+
+type OptionalInt = Option[int]
+
+type OptionalFloat64 = Option[float64]
